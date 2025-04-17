@@ -1,63 +1,96 @@
 "use client"
 
-import type React from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { type TrackOrderFormValues, trackOrderSchema } from "@/registry/new-york/login-block/lib/auth-schema"
 
 export function TrackOrderForm() {
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const form = useForm<TrackOrderFormValues>({
+    resolver: zodResolver(trackOrderSchema),
+    defaultValues: {
+      trackOrderNumber: "",
+      trackOrderEmail: "",
+      trackOrderPostal: "",
+    },
+  })
+
+  const onSubmit = async (data: TrackOrderFormValues) => {
+    // Simulate API call
+    console.log("Order tracking form submitted", data)
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     // Handle order tracking logic here
-    console.log("Order tracking form submitted")
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="space-y-2">
-        <Label htmlFor="trackOrderNumber" className="text-gray-700 font-normal">
-          Order Number
-        </Label>
-        <Input
-          id="trackOrderNumber"
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+        <FormField
+          control={form.control}
           name="trackOrderNumber"
-          placeholder="Enter your order number"
-          required
-          className="border-gray-200 focus:border-gray-300 focus:ring-gray-200"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Order Number</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  placeholder="Enter your order number"
+                  className="border-gray-200 focus:border-gray-300 focus:ring-gray-200"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="trackOrderEmail" className="text-gray-700 font-normal">
-          Email Address
-        </Label>
-        <Input
-          id="trackOrderEmail"
+        <FormField
+          control={form.control}
           name="trackOrderEmail"
-          type="email"
-          placeholder="Email used for order"
-          required
-          className="border-gray-200 focus:border-gray-300 focus:ring-gray-200"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email Address</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  type="email"
+                  placeholder="Email used for order"
+                  className="border-gray-200 focus:border-gray-300 focus:ring-gray-200"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="trackOrderPostal" className="text-gray-700 font-normal">
-          Postal Code
-        </Label>
-        <Input
-          id="trackOrderPostal"
+        <FormField
+          control={form.control}
           name="trackOrderPostal"
-          placeholder="Shipping postal code"
-          required
-          className="border-gray-200 focus:border-gray-300 focus:ring-gray-200"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Postal Code</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  placeholder="Shipping postal code"
+                  className="border-gray-200 focus:border-gray-300 focus:ring-gray-200"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
 
-      <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white mt-6">
-        Track Order
-      </Button>
-    </form>
+        <Button
+          type="submit"
+          className="w-full bg-gray-900 hover:bg-gray-800 text-white mt-6"
+          disabled={form.formState.isSubmitting}
+        >
+          {form.formState.isSubmitting ? "Tracking..." : "Track Order"}
+        </Button>
+      </form>
+    </Form>
   )
 }

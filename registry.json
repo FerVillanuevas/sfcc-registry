@@ -4,61 +4,47 @@
   "homepage": "https://acme.com",
   "items": [
     {
-      "name": "hello-world",
+      "name": "login-block",
       "type": "registry:component",
-      "title": "Hello World",
-      "description": "A simple hello world component",
-      "registryDependencies": ["button"],
+      "title": "Login Form",
+      "description": "A Login Form showing hooks, libs and components.",
+      "registryDependencies": ["card", "button", "input", "label", "checkbox"],
       "files": [
         {
-          "path": "registry/new-york/hello-world/hello-world.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "example-form",
-      "type": "registry:component",
-      "title": "Example Form",
-      "description": "A contact form with Zod validation.",
-      "dependencies": ["zod"],
-      "registryDependencies": ["button", "input", "label", "textarea", "card"],
-      "files": [
-        {
-          "path": "registry/new-york/example-form/example-form.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "complex-component",
-      "type": "registry:component",
-      "title": "Complex Component",
-      "description": "A complex component showing hooks, libs and components.",
-      "registryDependencies": ["card"],
-      "files": [
-        {
-          "path": "registry/new-york/complex-component/page.tsx",
+          "path": "registry/new-york/login-block/page.tsx",
           "type": "registry:page",
-          "target": "app/pokemon/page.tsx"
+          "target": "app/pages/Login/page.tsx"
         },
         {
-          "path": "registry/new-york/complex-component/components/pokemon-card.tsx",
+          "path": "registry/new-york/login-block/components/banner.tsx",
           "type": "registry:component"
         },
         {
-          "path": "registry/new-york/complex-component/components/pokemon-image.tsx",
+          "path": "registry/new-york/login-block/components/login-form.tsx",
           "type": "registry:component"
         },
         {
-          "path": "registry/new-york/complex-component/lib/pokemon.ts",
+          "path": "registry/new-york/login-block/components/register-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/new-york/login-block/components/track-order-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/new-york/login-block/lib/auth-schema.ts",
           "type": "registry:lib"
         },
         {
-          "path": "registry/new-york/complex-component/hooks/use-pokemon.ts",
+          "path": "registry/new-york/login-block/hooks/use-media-query.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "registry/new-york/login-block/hooks/use-mobile.ts",
           "type": "registry:hook"
         }
-      ]
+      ],
+      "dependencies": ["lucide-react"]
     }
   ]
 }
