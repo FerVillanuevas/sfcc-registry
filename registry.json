@@ -40,7 +40,7 @@
           "type": "registry:hook"
         },
         {
-          "path": "registry/new-york/login-block/hooks/use-mobile.ts",
+          "path": "registry/new-york/login-block/hooks/use-mobile.tsx",
           "type": "registry:hook"
         }
       ],
